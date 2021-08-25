@@ -1,0 +1,823 @@
+
+////////////////////////////
+
+//LOGO
+
+.logo{
+
+    height: 3.25rem;
+
+    margin-left: 2rem;
+
+}
+
+
+
+/////////////////////////
+
+//SEARCH
+
+.search {
+    
+
+    flex: 0 0 40%; // so first number we dont want to it grow( dont want it fill all the available space
+                   // second we dont want it shrink 
+                   // third we want it to occuppy 40% of the header
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (max-width: $bp-smallest) {
+        order: 1; /* we are trying to put search bar to be last  default for items order is 0 so in this case will be last and then will put underneath */
+        flex: 0 0 100%; /* so this is fix so search bar can go underneath */
+
+        background-color: var(--color-grey-light-2);
+
+
+    }
+
+
+    &__input {
+
+        font-family: inherit; // input element doesnt inherit font set by us we need to enforce inheritance
+        font-size: inherit;
+        color: inherit;
+
+        background-color: var(--color-grey-light-2);
+        border: none;
+        padding: .7rem 2rem;
+        border-radius: 100px;
+        width: 90%; // cos we want it to expand when we focus
+
+        transition: all .2s;
+
+        margin-right: -3.25rem; //!!!! to put svg on top of the search bar ????
+
+        &:focus {
+
+            outline: none; // it is a default to outline so we are removing it
+            width: 100%;
+
+            background-color: var(--color-grey-light-3);
+
+        }
+
+
+        &::-webkit-input-placeholder{
+            font-weight: 100;
+            color: var(--color-grey-light-4);
+
+        }
+
+    }
+
+    &__input:focus + &__button {  // remember + is for adjacent sibling this form akeing icon and search bar to be the same color when in focus
+
+        background-color: var(--color-grey-light-3);
+
+    }
+
+    &__button {
+
+        border: none;
+        background-color: var(--color-grey-light-2);
+
+        &:focus {
+
+            outline: none;   
+
+        }
+
+        &:active {
+
+            transform: translateY(2px); // so it moves down whenis active
+            
+        }
+
+
+
+    }
+
+    &__icon {
+
+        height: 2rem;
+        width: 2rem;
+
+        fill: var(--color-grey-dark-3); // changing the color of svg !!!!!
+
+
+
+    }
+}
+
+
+
+
+
+////////////////////////////
+
+//USER NAVIGATION
+
+
+.user-nav {
+    
+
+    align-self: stretch; /* so  it was origanlly aligned cnter in header howver we dont want that so this PROPERTY ALIGN SELF ! orverides! it so it is now stretched  ( as well good to pitn oit that height was set by the user name height) */
+
+    display: flex;
+    align-items: center;
+
+
+    & > * {
+        /* so we are trying to make nice space between the icon !! > selector all the direct children of user nav class element ..instead of grouping them */
+        padding: 0 2rem;
+        cursor: pointer;
+
+        height: 100%; /* so on hover it convers the whole area */
+
+
+        display: flex;  /* 3rd level of flex just align icons vertically */
+        align-items: center;
+
+    }
+
+    & > *:hover {
+        background-color: var(--color-grey-light-2);
+    }
+
+
+    &__icon-box {
+
+        position: relative; /* a tad strange with svg not oexactly a parent as usual but hey ho */
+        
+    }
+
+    &__icon {
+
+        height: 2.25rem;
+        width: 2.25rem;
+
+        fill: var(--color-grey-dark-2);
+
+
+    }
+
+    &__notification{
+
+        font-size: .8rem;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: white;
+
+        position: absolute; /* this for positioning of the small red buttons */
+        top: 1.5rem;
+        right: 1.1rem;
+
+
+        display: flex; /* it works with a text so it trears a a child if it is only text in the container i guess */
+        align-items: center;
+        justify-content: center;
+
+
+    }
+    
+
+    
+    &__user-photo {
+
+        height: 3.75rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+
+
+    }
+
+    &__user {
+        position:relative;
+        
+    }
+
+    &__user-dropdowncontent {
+         visibility: hidden;
+         position: absolute;
+         top: 100%;
+         right: 0;
+         transition: width .3s;
+            
+
+    }
+
+    &__user-dropdowncontent a{
+        text-decoration: none;
+        padding: 1rem;
+        transition: background-color 1s ease-in;
+    }
+
+    &__user-dropdowncontent a:hover {
+
+        background-color: var(--color-primary); 
+        color:  white;
+    }
+
+    &__user:hover &__user-dropdowncontent {
+        display: block;
+        visibility: visible;
+        width: 150%;
+        text-align: center;
+        
+
+        
+
+        background-color: var(--color-grey-light-2);
+        z-index: 1;
+    }
+    &__user:hover &__user-dropdowncontent a {
+        display: block;
+    }
+
+}
+
+
+/////////////////
+
+// SIDE NAVIGATION
+
+.side-nav {
+
+    font-size: 1.4rem;
+    list-style: none; 
+    margin-top: 3.5rem ;
+
+
+    @media only screen and (max-width: $bp-medium) {
+
+        display: flex; /* we want to items to be side by side so display flex property on the parant on this breakpoint */
+        margin: 0;
+    }
+
+    &__item {
+        position: relative;
+
+        @media only screen and (max-width: $bp-medium) {
+
+            flex: 1; /* we are giving each item of nav ability to grow 1  they are flex items at this breakpoint so they will equally occupy the space between them */
+    
+        
+        }
+
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+
+            @media only screen and (max-width: $bp-medium){
+                margin-bottom: 0;
+            }
+        }
+
+    }
+
+    &__item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%; // the same height as item  cos this pseudo of item
+        width: 3px; // no sure I guess just for demostration or some other reason
+        background-color: var(--color-primary);
+
+
+        transform: scaleY(0);
+        /* transform origin: is default in the middle*/
+        transition: transform .2s,/* rememeber transition property on animatioan and then what animation and time scale */
+
+                    width .4s  cubic-bezier(1,0,0,1) .2s,  /* so the first number is how long the animation last and second is delay so in this case witdth expansion will be delayed .2s  vila after fist thing y scale happens */
+                    /* cubic bezier is thingy check the site in this starts slowly and then it speeds up */
+
+                    background-color .1s;
+    }
+
+
+    &__item:hover::before,
+    &__item--active::before{
+
+        transform: scaleY(1); /* so when we hover it grows to 1 on Y axis this we mean vertically initial state is set on item scale y to 0 */
+        width: 100%; /* so it grows to the side to wide thingy
+        */
+    }
+
+    &__item:active::before{
+        background-color: var(--color-primary-dark); // active state when it is clicked !!!!
+    }
+
+
+    &__link:link,
+    &__link:visited {
+
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block; // so we can give them padding etc
+        padding: 1.5rem 3rem;
+
+
+        position: relative; // z index only works on positioned elements not static
+        z-index: 10;
+
+        display: flex;
+        align-items: center; /* another example of using flex box so icon and text next to it are perfectly alinged */
+
+        @media only screen and (max-width: $bp-medium) {
+                justify-content: center;
+                padding: 2rem; /* so the each nav item is equally spread out */
+        }
+
+        @media only screen and (max-width: $bp-small) {
+            flex-direction: column; /* once again changing the direction of the flax container items  they will go on top of each other */
+            padding: 1.5rem .5rem; // this just icons can fit
+
+        }
+
+
+    }
+
+    &__icon {
+        height: 1.75rem;
+        width: 1.75rem;
+        margin-right: 2rem;
+
+        fill: currentColor; /// amazing thing current color of the element or then parent !!!!!
+
+        @media only screen and (max-width: $bp-small) {
+            margin-right: 0;
+            margin-bottom: .7rem;
+            width: 1.5rem;
+            height: 1.5rem; // making icons smaller
+        }
+        
+    }
+}
+
+/////////////////
+
+// LEGAL TEXT
+
+.legal {
+    font-size: 1.2rem;
+    color: var(--color-grey-light-4);
+    text-align: center;
+    padding: 2.5rem;
+
+    @media only screen and (max-width: $bp-medium) {
+
+        display: none;
+    }
+
+}
+
+//////////////////
+
+// Main
+
+
+
+//Galery
+
+.gallery {
+
+    display: flex;
+
+    &__photo {
+
+        width: 100%; // figure is the parent which is flex item so think 
+        display: block; // always as a block to give it measuresremeber image tag or element is inline
+    }
+}
+
+
+////////////////////
+
+//HOTEL OVERVIEW
+
+.overview{
+
+    display: flex;
+
+    align-items: center;
+
+    border-bottom: var(--line);
+
+    //justify-content: space-between;
+
+    &__heading{
+
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 3rem;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+            padding: 1.25rem 2rem; // this is what defines the size of that overview remember 
+           
+        }
+
+    }
+
+    &__stars {
+
+        /* flex: 1; again not ideal cos in this case it will grow or coccupy all possible its avalable space but we want gp between 2 and 2 flex items*/
+
+        margin-right: auto; /* !!!!!!! super trick !!! */
+
+        display: flex; /* so the stars are perfectly alinged and next to ech other better svg kinda behaves as an inline element */
+
+    }
+
+    &__icon-star,
+    &__icon-location {
+
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: var(--color-primary);
+
+    }
+
+    &__location {
+
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+
+    }
+
+    &__icon-location{
+        margin-right: .5rem; // giving it a little space
+
+    }
+
+    &__rating {
+
+        background-color: var(--color-primary);
+        margin-left: 3rem;
+        color: white;
+
+
+        padding: 0 2.25rem;
+
+
+        align-self: stretch; // we are overwriting for it to strecth to occupy all space 
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center; /* now next to each other center even vertically so must put flex direction to column for them to be on the top of the each other */
+
+        @media only screen and (max-width: $bp-small) {
+            padding:  0 2.25rem;
+            
+        }
+
+    }
+
+    &__rating-average {
+
+        font-size: 2.25rem;
+        font-weight: 300;
+
+        margin-bottom: -3px;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+        }
+
+    }
+
+    &__rating-count {
+
+        font-size: .8rem;
+        text-transform: uppercase;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 0.5rem;
+        }
+
+    }
+
+}
+
+////////////////////
+
+//BUTTON
+
+.btn-inline {
+    border: none;
+    color: var(--color-primary);
+    font-size: inherit;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    display: inline-block;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .2s;
+
+    
+    & span {
+        margin-left: 3px; /* this is for the span and button in a revieww section so selection of span in btn-inline */
+        transition: margin-left .2s;  /* it is here cos o hover below margin thingy increases remember initial state */
+    }
+
+    &:hover {
+        color: var(--color-grey-dark-1);
+
+        span {
+            margin-left: 8px; /* check it out animation on hover margin will increase */
+        }
+
+       
+    }
+
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 1rem 4rem rgba(0,0,0,.25);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+}
+
+/////////////////////////////////
+
+// PARAGRAPH
+
+.paragraph:not(:last-of-type) { /* different from child thisnotthe child butlast of p type */
+    margin-bottom: 2rem;
+}
+
+
+///////////////////////////////////
+
+//LIST
+.list{
+    list-style: none;
+    margin: 3rem 0;
+    padding: 3rem 0; // inner space  :)
+    border-top: var(--line);
+
+
+    display: flex;
+    flex-wrap: wrap; /* check it out useful to have a look how it works */
+
+    &__item {
+
+        flex: 0 0 50%; /* super cool use of flex wrap and now istead of giving them width properry we use flex no grow no shrink 50% of wodth of the parent element so they are side by side */
+
+        margin-bottom: .7rem;
+    }
+
+    &__item::before {
+
+        /* we are pitting before the list item as before pseudo element */
+
+        content: "";
+        display: inline-block; // to give it measurements
+        height: 1rem;
+        width: 1rem;
+        margin-right: .7rem;
+
+        //Older Browser
+        // background-image: url(../img/chevron-thin-right.svg);
+        // background-size: cover;
+
+        //Newer Browsers
+        background-color: var(--color-primary);
+        -webkit-mask-image: url(../img/chevron-thin-right.svg);
+        -webkit-mask-size: cover;
+    }
+
+}
+
+
+
+///////////////////////////////
+
+//RECOMMEND
+
+.recommend {
+
+    
+    font-size: 1.3rem;
+    color: var(--color-grey-dark-3);
+
+    display: flex;
+
+    align-items: center;
+
+    &__count{ 
+        margin-right: auto; /* super cool trick remember it look aboe in the code as well ..it is put it right to the text which count class in this case */
+    }
+
+    &__friends {
+        display: flex; /* so they are always side by side */
+    }
+
+    
+
+    &__photo {
+
+        box-sizing: content-box; /* default we need it in this case so the white line we wnat wont shrink the picks but add to the top */
+
+        height: 4rem;
+        width: 4rem;
+        border-radius: 50%;
+        border: 3px solid white;
+
+        &:not(:last-child) {
+            margin-right: -2rem;  /* so they are overlapping super cool thing negative margin  */
+        }
+    }
+
+}
+
+///////////////////////////////
+
+//REVIEWS
+
+.review{
+
+    background-color: white;
+    box-shadow: var(--shadow-light);
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+
+    position: relative;
+    overflow: hidden; /* quatation was overflowing */
+
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
+
+    &__text {
+
+        margin-bottom: 2rem; 
+        z-index: 10;
+        position: relative;
+
+    }
+
+    &__user {
+        display: flex;
+        //justify-content: space-between;
+        align-items: center;
+
+        //z-index: 10;
+        position: relative;
+
+    }
+
+    
+
+    &__photo {
+        height: 4.5rem;
+        width: 4.5rem;
+        border-radius: 50%;
+
+    }
+
+    &__user-box {
+
+        margin-right: auto; /* so the rating is pushed all the way to the side */
+
+    }
+
+    &__user-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: .4rem;
+
+
+
+    }
+
+    &__user-date {
+
+        font-size: 1rem;
+        color: var(--color-grey-dark-3);
+
+    }
+
+    &__rating {
+        color: var(--color-primary);
+        font-size: 2.2rem;
+        font-weight: 300;
+
+    }
+
+    &::before {
+        content: "\201C";
+        position: absolute;
+        top: -2.75rem;
+        left: -1rem;
+        line-height: 1;
+        font-size: 20rem;
+        color: var(--color-grey-light-2);
+        font-family: sans-serif;
+        z-index: 1;
+    }
+
+}
+
+
+
+////////////////////////////////////////
+// CALL TO ACTION
+.cta {
+    padding: 3.5rem 0;
+    text-align: center;
+
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2.5rem;
+    }
+
+    
+    &__book-now {
+        font-size: 2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+    }
+}
+
+
+////////////////////////////////////////
+// CALL TO ACTION
+.btn {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: none;
+    background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
+    color: #fff;
+    position: relative;
+    overflow: hidden; /* this is time hiding the elemtn not like opacity thingy it is a tad different */
+    cursor: pointer;
+
+    & > * {
+        display: inline-block;
+        height: 100%;  // specifiies the same hieght and width as parent
+        width: 100%;
+        transition: all .2s; /* so this intital state for all the animation so it is here */
+    }
+
+    &__visible {
+        padding: 2rem 7.5rem; // this defines size of the button in this case
+    }
+
+    &__invisible {
+        position: absolute;
+        padding: 2rem 0; // intersting thing with the size of the spanoverflowing 
+        left: 0;
+        top: -100%;
+    }
+
+    &:hover {
+        background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
+    }
+
+    &:hover &__visible {
+        transform: translateY(100%); /*moves down on hover */
+
+    }
+
+    &:hover &__invisible {
+        top: 0; // by doing this it comes down not like initial state 
+    }
+
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
+    }
+}

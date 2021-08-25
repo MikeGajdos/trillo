@@ -1,0 +1,145 @@
+.container {
+    max-width: 120rem ; // so it can shrink if there is not enough space specified in max width.. then it simply occupies 1005 available space
+    margin: 8rem auto; // centering the container withing its parent remember
+
+    background-color: var(--color-grey-light-2);
+
+    box-shadow: var(--shadow-dark);
+
+    min-height: 50rem;
+
+    @media only screen and (max-width: $bp-largest) {
+        margin: 0;
+        max-width: 100%; // interesting food for thought
+        width: 100%; 
+
+    }
+
+
+}
+
+.header {
+    font-size: 1.4rem ;// for input we changed so it can inherit that and make a slighty bigger
+    height: 7rem;
+    background-color: white;
+    border-bottom: var(--line);
+    display: flex;
+    justify-content: space-between; // remember these properties must to on parent or better on flex container
+
+    align-items: center; // remember default is stretch
+
+    @media only screen and (max-width: $bp-smallest){
+        flex-wrap: wrap; /*so preparing items in this contaner to wrap if there is not enough space */
+        height: 11rem ; // fixing the spacing issues of the container
+        align-content: space-around; /* this is only for wrap thingy remember */
+    }
+
+
+}
+
+.content{
+
+    display: flex;
+
+
+    @media only screen and (max-width: $bp-medium) {
+
+        flex-direction: column; /* so .. we want to put nev bar on top the hotel content.. perfect way to use flex direction it was row as default  but now is column */
+    }
+
+
+
+
+}
+
+.sidebar{
+    background-color:var(--color-grey-dark-1);
+
+    flex: 0 0 18%; // so first flex growth if 0 we dont want it grow second flex shrink if 0 we dont want it shrink and last is flaex basis
+
+
+    display: flex;  /* things to consider--- changing the flex direction no the MAIN AXIS IS Y AXIS--- so we are putting legal at the bottom justify content for that remember it is a different direction */
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.hotel-view {
+
+    // testing
+    background-color: white;
+    //height: 80rem;
+
+
+    flex: 1;
+
+
+}
+
+
+
+.detail {
+    font-size: 1.4rem;
+    display: flex; // so description & user reviews are side by side
+
+    // flex-wrap: wrap;
+
+    padding: 4.5rem;
+
+    background-color: var(--color-grey-light-2);
+
+    border-bottom: var(--line);
+
+
+    @media only screen and (max-width: $bp-medium) {
+        padding: 3rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+        flex-direction: column;
+        /* remember order of the media queries is important 
+        flex direction in this case column cos we want to itmes or flex item go to on top of each other */
+    }
+}
+
+.description {
+    
+
+    background-color: white;
+
+    box-shadow: var(--shadow-light);
+
+    padding: 3rem;
+
+    flex: 0 0 60%; // no grow no shrink 60%width of parent element
+
+    margin-right: 4.5rem;
+
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2rem;
+        margin-right: 3rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      
+        margin-right: 0;
+        margin-bottom: 3rem;
+    }
+
+    
+
+
+}
+
+.user-reviews {
+
+    
+
+    flex: 1; // all available space left 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* changing the direction of the main axis so the main axis is Y axis verticall one */
+
+}
+
