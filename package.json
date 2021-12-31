@@ -24,7 +24,7 @@
     "sass": "^1.25.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.15.4"
+    "@babel/runtime": "^7.16.7"
   },
   "browserslist": [
     "> 1%",
